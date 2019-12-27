@@ -5641,493 +5641,102 @@ declare namespace monaco.worker {
 
 //dtsv=2
 
-
-declare namespace monaco.languages.typescript {
-
-    enum ModuleKind {
-        None = 0,
-        CommonJS = 1,
-        AMD = 2,
-        UMD = 3,
-        System = 4,
-        ES2015 = 5,
-        ESNext = 99
-    }
-
-    enum JsxEmit {
-        None = 0,
-        Preserve = 1,
-        React = 2,
-        ReactNative = 3
-    }
-    enum NewLineKind {
-        CarriageReturnLineFeed = 0,
-        LineFeed = 1
-    }
-
-    enum ScriptTarget {
-        ES3 = 0,
-        ES5 = 1,
-        ES2015 = 2,
-        ES2016 = 3,
-        ES2017 = 4,
-        ES2018 = 5,
-        ES2019 = 6,
-        ES2020 = 7,
-        ESNext = 99,
-        JSON = 100,
-        Latest = ESNext,
-    }
-
-    export enum ModuleResolutionKind {
-        Classic = 1,
-        NodeJs = 2
-    }
-
-    interface MapLike<T> {
-        [index: string]: T;
-    }
-
-    type CompilerOptionsValue = string | number | boolean | (string | number)[] | string[] | MapLike<string[]> | null | undefined;
-    interface CompilerOptions {
-        allowJs?: boolean;
-        allowSyntheticDefaultImports?: boolean;
-        allowUnreachableCode?: boolean;
-        allowUnusedLabels?: boolean;
-        alwaysStrict?: boolean;
-        baseUrl?: string;
-        charset?: string;
-        checkJs?: boolean;
-        declaration?: boolean;
-        declarationMap?: boolean;
-        emitDeclarationOnly?: boolean;
-        declarationDir?: string;
-        disableSizeLimit?: boolean;
-        downlevelIteration?: boolean;
-        emitBOM?: boolean;
-        emitDecoratorMetadata?: boolean;
-        experimentalDecorators?: boolean;
-        forceConsistentCasingInFileNames?: boolean;
-        importHelpers?: boolean;
-        inlineSourceMap?: boolean;
-        inlineSources?: boolean;
-        isolatedModules?: boolean;
-        jsx?: JsxEmit;
-        keyofStringsOnly?: boolean;
-        lib?: string[];
-        locale?: string;
-        mapRoot?: string;
-        maxNodeModuleJsDepth?: number;
-        module?: ModuleKind;
-        moduleResolution?: ModuleResolutionKind;
-        newLine?: NewLineKind;
-        noEmit?: boolean;
-        noEmitHelpers?: boolean;
-        noEmitOnError?: boolean;
-        noErrorTruncation?: boolean;
-        noFallthroughCasesInSwitch?: boolean;
-        noImplicitAny?: boolean;
-        noImplicitReturns?: boolean;
-        noImplicitThis?: boolean;
-        noStrictGenericChecks?: boolean;
-        noUnusedLocals?: boolean;
-        noUnusedParameters?: boolean;
-        noImplicitUseStrict?: boolean;
-        noLib?: boolean;
-        noResolve?: boolean;
-        out?: string;
-        outDir?: string;
-        outFile?: string;
-        paths?: MapLike<string[]>;
-        preserveConstEnums?: boolean;
-        preserveSymlinks?: boolean;
-        project?: string;
-        reactNamespace?: string;
-        jsxFactory?: string;
-        composite?: boolean;
-        removeComments?: boolean;
-        rootDir?: string;
-        rootDirs?: string[];
-        skipLibCheck?: boolean;
-        skipDefaultLibCheck?: boolean;
-        sourceMap?: boolean;
-        sourceRoot?: string;
-        strict?: boolean;
-        strictFunctionTypes?: boolean;
-        strictNullChecks?: boolean;
-        strictPropertyInitialization?: boolean;
-        suppressExcessPropertyErrors?: boolean;
-        suppressImplicitAnyIndexErrors?: boolean;
-        target?: ScriptTarget;
-        traceResolution?: boolean;
-        resolveJsonModule?: boolean;
-        types?: string[];
-        /** Paths used to compute primary types search locations */
-        typeRoots?: string[];
-        esModuleInterop?: boolean;
-        [option: string]: CompilerOptionsValue | undefined;
-    }
-
-    export interface DiagnosticsOptions {
-        noSemanticValidation?: boolean;
-        noSyntaxValidation?: boolean;
-        noSuggestionDiagnostics?: boolean;
-        diagnosticCodesToIgnore?: number[];
-    }
-
-    export interface LanguageServiceDefaults {
-        /**
-         * Add an additional source file to the language service. Use this
-         * for typescript (definition) files that won't be loaded as editor
-         * documents, like `jquery.d.ts`.
-         *
-         * @param content The file content
-         * @param filePath An optional file path
-         * @returns A disposable which will remove the file from the
-         * language service upon disposal.
-         */
-        addExtraLib(content: string, filePath?: string): IDisposable;
-
-        /**
-         * Remove all existing extra libs and set the additional source
-         * files to the language service. Use this for typescript definition
-         * files that won't be loaded as editor documents, like `jquery.d.ts`.
-         * @param libs An array of entries to register.
-         */
-        setExtraLibs(libs: { content: string; filePath?: string }[]): void;
-
-        /**
-         * Set TypeScript compiler options.
-         */
-        setCompilerOptions(options: CompilerOptions): void;
-
-        /**
-         * Configure whether syntactic and/or semantic validation should
-         * be performed
-         */
-        setDiagnosticsOptions(options: DiagnosticsOptions): void;
-
-        /**
-         * Configure when the worker shuts down. By default that is 2mins.
-         *
-         * @param value The maximum idle time in milliseconds. Values less than one
-         * mean never shut down.
-         */
-        setMaximumWorkerIdleTime(value: number): void;
-
-        /**
-         * Configure if all existing models should be eagerly sync'd
-         * to the worker on start or restart.
-         */
-        setEagerModelSync(value: boolean): void;
-    }
-
-    export var typescriptVersion: string;
-
-    export var typescriptDefaults: LanguageServiceDefaults;
-    export var javascriptDefaults: LanguageServiceDefaults;
-
-    export var getTypeScriptWorker: () => Promise<any>;
-    export var getJavaScriptWorker: () => Promise<any>;
-}
-
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-declare namespace monaco.languages.css {
-    export interface DiagnosticsOptions {
-        readonly validate?: boolean;
-        readonly lint?: {
-            readonly compatibleVendorPrefixes?: 'ignore' | 'warning' | 'error',
-            readonly vendorPrefix?: 'ignore' | 'warning' | 'error',
-            readonly duplicateProperties?: 'ignore' | 'warning' | 'error',
-            readonly emptyRules?: 'ignore' | 'warning' | 'error',
-            readonly importStatement?: 'ignore' | 'warning' | 'error',
-            readonly boxModel?: 'ignore' | 'warning' | 'error',
-            readonly universalSelector?: 'ignore' | 'warning' | 'error',
-            readonly zeroUnits?: 'ignore' | 'warning' | 'error',
-            readonly fontFaceProperties?: 'ignore' | 'warning' | 'error',
-            readonly hexColorLength?: 'ignore' | 'warning' | 'error',
-            readonly argumentsInColorFunction?: 'ignore' | 'warning' | 'error',
-            readonly unknownProperties?: 'ignore' | 'warning' | 'error',
-            readonly ieHack?: 'ignore' | 'warning' | 'error',
-            readonly unknownVendorSpecificProperties?: 'ignore' | 'warning' | 'error',
-            readonly propertyIgnoredDueToDisplay?: 'ignore' | 'warning' | 'error',
-            readonly important?: 'ignore' | 'warning' | 'error',
-            readonly float?: 'ignore' | 'warning' | 'error',
-            readonly idSelector?: 'ignore' | 'warning' | 'error'
-        }
-    }
-
-    export interface ModeConfiguration {
-        /**
-         * Defines whether the built-in completionItemProvider is enabled.
-         */
-        readonly completionItems?: boolean;
-
-        /**
-         * Defines whether the built-in hoverProvider is enabled.
-         */
-        readonly hovers?: boolean;
-
-        /**
-         * Defines whether the built-in documentSymbolProvider is enabled.
-         */
-        readonly documentSymbols?: boolean;
-
-        /**
-         * Defines whether the built-in definitions provider is enabled.
-         */
-        readonly definitions?: boolean;
-
-        /**
-         * Defines whether the built-in references provider is enabled.
-         */
-        readonly references?: boolean;
-
-        /**
-         * Defines whether the built-in references provider is enabled.
-         */
-        readonly documentHighlights?: boolean;
-
-        /**
-         * Defines whether the built-in rename provider is enabled.
-         */
-        readonly rename?: boolean;
-
-        /**
-         * Defines whether the built-in color provider is enabled.
-         */
-        readonly colors?: boolean;
-
-        /**
-         * Defines whether the built-in foldingRange provider is enabled.
-         */
-        readonly foldingRanges?: boolean;
-
-        /**
-         * Defines whether the built-in diagnostic provider is enabled.
-         */
-        readonly diagnostics?: boolean;
-
-        /**
-         * Defines whether the built-in selection range provider is enabled.
-         */
-        readonly selectionRanges?: boolean;
-
-    }
-
-    export interface LanguageServiceDefaults {
-        readonly onDidChange: IEvent<LanguageServiceDefaults>;
-        readonly diagnosticsOptions: DiagnosticsOptions;
-        readonly modeConfiguration: ModeConfiguration;
-        setDiagnosticsOptions(options: DiagnosticsOptions): void;
-        setModeConfiguration(modeConfiguration: ModeConfiguration): void;
-    }
-
-    export var cssDefaults: LanguageServiceDefaults;
-    export var lessDefaults: LanguageServiceDefaults;
-    export var scssDefaults: LanguageServiceDefaults;
-}
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-declare namespace monaco.languages.json {
-    export interface DiagnosticsOptions {
-        /**
-         * If set, the validator will be enabled and perform syntax validation as well as schema based validation.
-         */
-        readonly validate?: boolean;
-        /**
-         * If set, comments are tolerated. If set to false, syntax errors will be emitted for comments.
-         */
-        readonly allowComments?: boolean;
-        /**
-         * A list of known schemas and/or associations of schemas to file names.
-         */
-        readonly schemas?: {
-            /**
-             * The URI of the schema, which is also the identifier of the schema.
-             */
-            readonly uri: string;
-            /**
-             * A list of file names that are associated to the schema. The '*' wildcard can be used. For example '*.schema.json', 'package.json'
-             */
-            readonly fileMatch?: string[];
-            /**
-             * The schema for the given URI.
-             */
-            readonly schema?: any;
-        }[];
-        /**
-         *  If set, the schema service would load schema content on-demand with 'fetch' if available
-         */
-        readonly enableSchemaRequest?: boolean;
-    }
+declare namespace monaco.languages.rcasm {
+    // export interface HTMLFormatConfiguration {
+    // 	readonly tabSize: number;
+    // 	readonly insertSpaces: boolean;
+    // 	readonly wrapLineLength: number;
+    // 	readonly unformatted: string;
+    // 	readonly contentUnformatted: string;
+    // 	readonly indentInnerHtml: boolean;
+    // 	readonly preserveNewLines: boolean;
+    // 	readonly maxPreserveNewLines: number;
+    // 	readonly indentHandlebars: boolean;
+    // 	readonly endWithNewline: boolean;
+    // 	readonly extraLiners: string;
+    // 	readonly wrapAttributes: 'auto' | 'force' | 'force-aligned' | 'force-expand-multiline';
+    // }
 
-    export interface ModeConfiguration {
-        /**
-         * Defines whether the built-in documentFormattingEdit provider is enabled.
-         */
-        readonly documentFormattingEdits?: boolean;
-
-        /**
-         * Defines whether the built-in documentRangeFormattingEdit provider is enabled.
-         */
-        readonly documentRangeFormattingEdits?: boolean;
-
-        /**
-         * Defines whether the built-in completionItemProvider is enabled.
-         */
-        readonly completionItems?: boolean;
-
-        /**
-         * Defines whether the built-in hoverProvider is enabled.
-         */
-        readonly hovers?: boolean;
-
-        /**
-         * Defines whether the built-in documentSymbolProvider is enabled.
-         */
-        readonly documentSymbols?: boolean;
-
-        /**
-         * Defines whether the built-in tokens provider is enabled.
-         */
-        readonly tokens?: boolean;
-
-        /**
-         * Defines whether the built-in color provider is enabled.
-         */
-        readonly colors?: boolean;
-
-        /**
-         * Defines whether the built-in foldingRange provider is enabled.
-         */
-        readonly foldingRanges?: boolean;
-
-        /**
-         * Defines whether the built-in diagnostic provider is enabled.
-         */
-        readonly diagnostics?: boolean;
-
-        /**
-         * Defines whether the built-in selection range provider is enabled.
-         */
-        readonly selectionRanges?: boolean;
-
-    }
-
-    export interface LanguageServiceDefaults {
-        readonly onDidChange: IEvent<LanguageServiceDefaults>;
-        readonly diagnosticsOptions: DiagnosticsOptions;
-        readonly modeConfiguration: ModeConfiguration;
-        setDiagnosticsOptions(options: DiagnosticsOptions): void;
-        setModeConfiguration(modeConfiguration: ModeConfiguration): void;
-    }
-
-    export var jsonDefaults: LanguageServiceDefaults;
-}
-
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-declare namespace monaco.languages.html {
-    export interface HTMLFormatConfiguration {
-        readonly tabSize: number;
-        readonly insertSpaces: boolean;
-        readonly wrapLineLength: number;
-        readonly unformatted: string;
-        readonly contentUnformatted: string;
-        readonly indentInnerHtml: boolean;
-        readonly preserveNewLines: boolean;
-        readonly maxPreserveNewLines: number;
-        readonly indentHandlebars: boolean;
-        readonly endWithNewline: boolean;
-        readonly extraLiners: string;
-        readonly wrapAttributes: 'auto' | 'force' | 'force-aligned' | 'force-expand-multiline';
-    }
-
-    export interface CompletionConfiguration {
-        [provider: string]: boolean;
-    }
+    // export interface CompletionConfiguration {
+    // 	[provider: string]: boolean;
+    // }
 
     export interface Options {
-        /**
-         * If set, comments are tolerated. If set to false, syntax errors will be emitted for comments.
-         */
-        readonly format?: HTMLFormatConfiguration;
-        /**
-         * A list of known schemas and/or associations of schemas to file names.
-         */
-        readonly suggest?: CompletionConfiguration;
+        // /**
+        //  * If set, comments are tolerated. If set to false, syntax errors will be emitted for comments.
+        //  */
+        // readonly format?: HTMLFormatConfiguration;
+        // /**
+        //  * A list of known schemas and/or associations of schemas to file names.
+        //  */
+        // readonly suggest?: CompletionConfiguration;
     }
 
     export interface ModeConfiguration {
-        /**
-         * Defines whether the built-in completionItemProvider is enabled.
-         */
-        readonly completionItems?: boolean;
+        // /**
+        //  * Defines whether the built-in completionItemProvider is enabled.
+        //  */
+        // readonly completionItems?: boolean;
 
-        /**
-         * Defines whether the built-in hoverProvider is enabled.
-         */
-        readonly hovers?: boolean;
+        // /**
+        //  * Defines whether the built-in hoverProvider is enabled.
+        //  */
+        // readonly hovers?: boolean;
 
-        /**
-         * Defines whether the built-in documentSymbolProvider is enabled.
-         */
-        readonly documentSymbols?: boolean;
+        // /**
+        //  * Defines whether the built-in documentSymbolProvider is enabled.
+        //  */
+        // readonly documentSymbols?: boolean;
 
-        /**
-         * Defines whether the built-in definitions provider is enabled.
-         */
-        readonly links?: boolean;
+        // /**
+        //  * Defines whether the built-in definitions provider is enabled.
+        //  */
+        // readonly links?: boolean;
 
-        /**
-         * Defines whether the built-in references provider is enabled.
-         */
-        readonly documentHighlights?: boolean;
+        // /**
+        //  * Defines whether the built-in references provider is enabled.
+        //  */
+        // readonly documentHighlights?: boolean;
 
-        /**
-         * Defines whether the built-in rename provider is enabled.
-         */
-        readonly rename?: boolean;
+        // /**
+        //  * Defines whether the built-in rename provider is enabled.
+        //  */
+        // readonly rename?: boolean;
 
-        /**
-         * Defines whether the built-in color provider is enabled.
-         */
-        readonly colors?: boolean;
+        // /**
+        //  * Defines whether the built-in color provider is enabled.
+        //  */
+        // readonly colors?: boolean;
 
-        /**
-         * Defines whether the built-in foldingRange provider is enabled.
-         */
-        readonly foldingRanges?: boolean;
+        // /**
+        //  * Defines whether the built-in foldingRange provider is enabled.
+        //  */
+        // readonly foldingRanges?: boolean;
 
         /**
          * Defines whether the built-in diagnostic provider is enabled.
          */
         readonly diagnostics?: boolean;
 
-        /**
-         * Defines whether the built-in selection range provider is enabled.
-         */
-        readonly selectionRanges?: boolean;
+        // /**
+        //  * Defines whether the built-in selection range provider is enabled.
+        //  */
+        // readonly selectionRanges?: boolean;
 
-        /**
-         * Defines whether the built-in documentFormattingEdit provider is enabled.
-         */
-        readonly documentFormattingEdits?: boolean;
+        // /**
+        //  * Defines whether the built-in documentFormattingEdit provider is enabled.
+        //  */
+        // readonly documentFormattingEdits?: boolean;
 
-        /**
-         * Defines whether the built-in documentRangeFormattingEdit provider is enabled.
-         */
-        readonly documentRangeFormattingEdits?: boolean;
+        // /**
+        //  * Defines whether the built-in documentRangeFormattingEdit provider is enabled.
+        //  */
+        // readonly documentRangeFormattingEdits?: boolean;
 
     }
 
@@ -6137,7 +5746,7 @@ declare namespace monaco.languages.html {
         setOptions(options: Options): void;
     }
 
-    export var htmlDefaults: LanguageServiceDefaults;
-    export var handlebarDefaults: LanguageServiceDefaults;
-    export var razorDefaults: LanguageServiceDefaults;
+    export var rcasmDefaults: LanguageServiceDefaults;
+//	export var handlebarDefaults: LanguageServiceDefaults;
+//	export var razorDefaults: LanguageServiceDefaults;
 }

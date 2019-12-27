@@ -5,10 +5,7 @@ module.exports = {
     entry: {
         "core": './ci/core.js',
         "editor.worker": './vscode/out-monaco-editor-core/esm/vs/editor/editor.worker.js',
-        "json.worker": 'monaco-json/release/esm/json.worker',
-        "css.worker": 'monaco-css/release/esm/css.worker',
-        "html.worker": 'monaco-html/release/esm/html.worker',
-        "ts.worker": 'monaco-typescript/release/esm/ts.worker',
+        "rcasm.worker": 'monaco-rcasm/release/esm/rcasm.worker',
     },
     output: {
         globalObject: 'self',
