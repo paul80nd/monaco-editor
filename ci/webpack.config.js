@@ -4,8 +4,8 @@ module.exports = {
     mode: 'production',
     entry: {
         "core": './ci/core.js',
-        "editor.worker": './vscode/out-monaco-editor-core/esm/vs/editor/editor.worker.js',
-        "rcasm.worker": 'monaco-rcasm/release/esm/rcasm.worker',
+        "editor.worker": '../vscode/out-monaco-editor-core/esm/vs/editor/editor.worker.js',
+        "rcasm.worker": '@paul80nd/monaco-rcasm/release/esm/rcasm.worker',
     },
     output: {
         globalObject: 'self',
