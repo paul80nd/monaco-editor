@@ -1,7 +1,7 @@
 {
   "name": "@paul80nd/monaco-editor",
   "private": false,
-  "version": "0.19.4",
+  "version": "0.19.5",
   "description": "A browser based code editor",
   "author": "Microsoft Corporation",
   "license": "MIT",

@@ -6131,10 +6131,10 @@ declare namespace monaco.languages.rcasm {
          */
         readonly completionItems?: boolean;
 
-        // /**
-        //  * Defines whether the built-in hoverProvider is enabled.
-        //  */
-        // readonly hovers?: boolean;
+        /**
+         * Defines whether the built-in hoverProvider is enabled.
+         */
+        readonly hovers?: boolean;
 
         // /**
         //  * Defines whether the built-in documentSymbolProvider is enabled.
