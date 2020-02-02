@@ -37,7 +37,7 @@
     "gulp-typedoc": "^2.2.2",
     "mocha": "^6.2.2",
     "monaco-editor-core": "0.19.3",
-    "@paul80nd/monaco-rcasm": "1.0.2",
+    "@paul80nd/monaco-rcasm": "1.0.3",
     "@paul80nd/monaco-languages": "1.0.2",
     "puppeteer": "^1.15.0",
     "rimraf": "^2.6.3",
