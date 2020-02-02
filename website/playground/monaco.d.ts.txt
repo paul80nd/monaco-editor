@@ -6136,30 +6136,30 @@ declare namespace monaco.languages.rcasm {
          */
         readonly hovers?: boolean;
 
-        // /**
-        //  * Defines whether the built-in documentSymbolProvider is enabled.
-        //  */
-        // readonly documentSymbols?: boolean;
+        /**
+         * Defines whether the built-in documentSymbolProvider is enabled.
+         */
+        readonly documentSymbols?: boolean;
 
-        // /**
-        //  * Defines whether the built-in definitions provider is enabled.
-        //  */
-        // readonly links?: boolean;
+        /**
+         * Defines whether the built-in definitions provider is enabled.
+         */
+        readonly definitions?: boolean;
 
-        // /**
-        //  * Defines whether the built-in references provider is enabled.
-        //  */
-        // readonly documentHighlights?: boolean;
+        /**
+         * Defines whether the built-in references provider is enabled.
+         */
+        readonly references?: boolean;
+
+        /**
+         * Defines whether the built-in references provider is enabled.
+         */
+        readonly documentHighlights?: boolean;
 
         // /**
         //  * Defines whether the built-in rename provider is enabled.
         //  */
         // readonly rename?: boolean;
-
-        // /**
-        //  * Defines whether the built-in color provider is enabled.
-        //  */
-        // readonly colors?: boolean;
 
         // /**
         //  * Defines whether the built-in foldingRange provider is enabled.

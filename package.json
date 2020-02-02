@@ -1,7 +1,7 @@
 {
   "name": "@paul80nd/monaco-editor",
   "private": false,
-  "version": "0.19.5",
+  "version": "0.19.6",
   "description": "A browser based code editor",
   "author": "Microsoft Corporation",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "gulp-typedoc": "^2.2.2",
     "mocha": "^6.2.2",
     "monaco-editor-core": "0.19.3",
-    "@paul80nd/monaco-rcasm": "1.0.3",
+    "@paul80nd/monaco-rcasm": "1.0.4",
     "@paul80nd/monaco-languages": "1.0.2",
     "puppeteer": "^1.15.0",
     "rimraf": "^2.6.3",
