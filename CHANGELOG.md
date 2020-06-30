@@ -1,5 +1,38 @@
 # Monaco Editor Changelog
 
+## [0.20.0] (11.02.2020)
+
+### New & Noteworthy
+* The editor can now be hosted inside a Shadow Root.
+* There is new API to read the editor's content width and height.
+* New editor options:
+  * `renderValidationDecorations` - render validation decorations even in read only editors
+  * `wrappingStrategy` - delegate wrapping points computation to the browser
+  * `comments.insertSpace` - insert a space around comments when running commenting commands
+  * `foldingHighlight` - highlight folded regions
+  * `peekWidgetDefaultFocus` - focus the inline editor or the tree when opening peek view
+
+### Breaking changes
+* Renamed `onCompositionStart`, `onCompositionEnd` to `onDidCompositionStart`, `onDidCompositionEnd`
+* Changed the argument passed in to `onDidPaste`
+* `WorkspaceEdit.edits` has now changed its shape such that edits must no longer be grouped by resource.
+* The Monaco Editor no longer supports IE 11. The last version that was tested in IE 11 is 0.18.1.
+
+### Thank you
+
+Contributions to `monaco-editor`:
+
+* [Josh Goldberg (@JoshuaKGoldberg)](https://github.com/JoshuaKGoldberg): Added section in Monarch docs for Inspect Tokens development helper [PR #1807](https://github.com/microsoft/monaco-editor/pull/1807)
+
+Contributions to `monaco-typescript`:
+
+* [Elizabeth Craig (@ecraig12345)](https://github.com/ecraig12345): Add types for TypeScriptWorker and missing LanguageServiceDefaults methods [PR #54](https://github.com/microsoft/monaco-typescript/pull/54)
+
+Contributions to `monaco-languages`:
+
+* [alan.invents (@ALANVF)](https://github.com/ALANVF): Highlight function definitions better [PR #79](https://github.com/microsoft/monaco-languages/pull/79)
+* [@nrayburn-tech](https://github.com/nrayburn-tech): Add support for multiline comments in Swift [PR #80](https://github.com/microsoft/monaco-languages/pull/80)
+
 ## [0.19.3] (14.01.2020)
 
 * brings back a way to get resolved editor options - [#1734](https://github.com/microsoft/monaco-editor/issues/1734)
@@ -48,6 +81,7 @@ Contributions to `monaco-languages`:
 ### Breaking changes
 
 * `getConfiguration()` is replaced by `getRawOptions()`, which returns the passed in editor options.
+* Starting with this version, the Monaco Editor no longer supports IE 11. The last version that was tested in IE 11 is 0.18.1.
 
 ### Thank you
 

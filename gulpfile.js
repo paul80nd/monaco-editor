@@ -506,8 +506,13 @@ function toExternalDTS(contents) {
 		if (line.indexOf('declare namespace monaco.') === 0) {
 			lines[i] = line.replace('declare namespace monaco.', 'export namespace ');
 		}
+
+		if (line.indexOf('declare let MonacoEnvironment') === 0) {
+			lines[i] = `declare global {\n    let MonacoEnvironment: Environment | undefined;\n}`;
+			// lines[i] = line.replace('declare namespace monaco.', 'export namespace ');
+		}
 	}
-	return lines.join('\n');
+	return lines.join('\n').replace(/\n\n\n+/g, '\n\n');
 }
 
 /**
@@ -766,7 +771,6 @@ const generateTestSamplesTask = function() {
 			'<html>',
 			'<head>',
 			'	<base href="..">',
-			'	<meta http-equiv="X-UA-Compatible" content="IE=edge" />',
 			'	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />',
 			'</head>',
 			'<body>',
