@@ -14,148 +14,40 @@ runTsc(`src/tsconfig.json`);
 //#region Type Defintion
 
 massageAndCopyDts(
-	`out/languages/amd-tsc/language/css/monaco.contribution.d.ts`,
-	`out/languages/bundled/css.d.ts`,
-	'monaco.languages.css'
-);
-massageAndCopyDts(
-	`out/languages/amd-tsc/language/html/monaco.contribution.d.ts`,
-	`out/languages/bundled/html.d.ts`,
-	'monaco.languages.html'
-);
-massageAndCopyDts(
-	`out/languages/amd-tsc/language/json/monaco.contribution.d.ts`,
-	`out/languages/bundled/json.d.ts`,
-	'monaco.languages.json'
-);
-massageAndCopyDts(
-	`out/languages/amd-tsc/language/typescript/monaco.contribution.d.ts`,
-	`out/languages/bundled/typescript.d.ts`,
-	'monaco.languages.typescript'
+	`out/languages/amd-tsc/language/rcasm/monaco.contribution.d.ts`,
+	`out/languages/bundled/rcasm.d.ts`,
+	'monaco.languages.rcasm'
 );
 
 //#endregion
 
-//#region css
+//#region rcasm
 
 buildESM({
-	base: 'language/css',
+	base: 'language/rcasm',
 	entryPoints: [
-		'src/language/css/monaco.contribution.ts',
-		'src/language/css/cssMode.ts',
-		'src/language/css/css.worker.ts'
+		'src/language/rcasm/monaco.contribution.ts',
+		'src/language/rcasm/rcasmMode.ts',
+		'src/language/rcasm/rcasm.worker.ts'
 	],
-	external: ['monaco-editor-core', '*/cssMode', '*/monaco.contribution']
+	external: ['monaco-editor-core', '*/rcasmMode', '*/monaco.contribution']
 });
 buildAMD({
-	base: 'language/css',
-	entryPoint: 'src/language/css/monaco.contribution.ts',
-	amdModuleId: 'vs/language/css/monaco.contribution',
+	base: 'language/rcasm',
+	entryPoint: 'src/language/rcasm/monaco.contribution.ts',
+	amdModuleId: 'vs/language/rcasm/monaco.contribution',
 	amdDependencies: ['vs/editor/editor.api']
 });
 buildAMD({
-	base: 'language/css',
-	entryPoint: 'src/language/css/cssMode.ts',
-	amdModuleId: 'vs/language/css/cssMode',
+	base: 'language/rcasm',
+	entryPoint: 'src/language/rcasm/rcasmMode.ts',
+	amdModuleId: 'vs/language/rcasm/rcasmMode',
 	external: ['*/monaco.contribution']
 });
 buildAMD({
-	base: 'language/css',
-	entryPoint: 'src/language/css/cssWorker.ts',
-	amdModuleId: 'vs/language/css/cssWorker'
-});
-
-//#endregion
-
-//#region html
-
-buildESM({
-	base: 'language/html',
-	entryPoints: [
-		'src/language/html/monaco.contribution.ts',
-		'src/language/html/htmlMode.ts',
-		'src/language/html/html.worker.ts'
-	],
-	external: ['monaco-editor-core', '*/htmlMode', '*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/html',
-	entryPoint: 'src/language/html/monaco.contribution.ts',
-	amdModuleId: 'vs/language/html/monaco.contribution',
-	amdDependencies: ['vs/editor/editor.api']
-});
-buildAMD({
-	base: 'language/html',
-	entryPoint: 'src/language/html/htmlMode.ts',
-	amdModuleId: 'vs/language/html/htmlMode',
-	external: ['*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/html',
-	entryPoint: 'src/language/html/htmlWorker.ts',
-	amdModuleId: 'vs/language/html/htmlWorker'
-});
-
-//#endregion
-
-//#region json
-
-buildESM({
-	base: 'language/json',
-	entryPoints: [
-		'src/language/json/monaco.contribution.ts',
-		'src/language/json/jsonMode.ts',
-		'src/language/json/json.worker.ts'
-	],
-	external: ['monaco-editor-core', '*/jsonMode', '*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/json',
-	entryPoint: 'src/language/json/monaco.contribution.ts',
-	amdModuleId: 'vs/language/json/monaco.contribution',
-	amdDependencies: ['vs/editor/editor.api']
-});
-buildAMD({
-	base: 'language/json',
-	entryPoint: 'src/language/json/jsonMode.ts',
-	amdModuleId: 'vs/language/json/jsonMode',
-	external: ['*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/json',
-	entryPoint: 'src/language/json/jsonWorker.ts',
-	amdModuleId: 'vs/language/json/jsonWorker'
-});
-
-//#endregion
-
-//#region typescript
-
-buildESM({
-	base: 'language/typescript',
-	entryPoints: [
-		'src/language/typescript/monaco.contribution.ts',
-		'src/language/typescript/tsMode.ts',
-		'src/language/typescript/ts.worker.ts'
-	],
-	external: ['monaco-editor-core', '*/tsMode', '*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/typescript',
-	entryPoint: 'src/language/typescript/monaco.contribution.ts',
-	amdModuleId: 'vs/language/typescript/monaco.contribution',
-	amdDependencies: ['vs/editor/editor.api']
-});
-buildAMD({
-	base: 'language/typescript',
-	entryPoint: 'src/language/typescript/tsMode.ts',
-	amdModuleId: 'vs/language/typescript/tsMode',
-	external: ['*/monaco.contribution']
-});
-buildAMD({
-	base: 'language/typescript',
-	entryPoint: 'src/language/typescript/tsWorker.ts',
-	amdModuleId: 'vs/language/typescript/tsWorker'
+	base: 'language/rcasm',
+	entryPoint: 'src/language/rcasm/rcasmWorker.ts',
+	amdModuleId: 'vs/language/rcasm/rcasmWorker'
 });
 
 //#endregion
@@ -168,7 +60,9 @@ glob('../src/basic-languages/*/*.contribution.ts', { cwd: __dirname }, function 
 		return;
 	}
 
-	const languages = files.map((file) => file.split('/')[3]);
+	const languages = files
+		.map((file) => file.split('/')[3])
+		.filter((file) => file === 'mips' || file === 'rcasm' || file === 'rcdsm');
 
 	// ESM
 	{
