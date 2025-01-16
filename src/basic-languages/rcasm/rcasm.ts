@@ -43,7 +43,8 @@ export const language = <languages.IMonarchLanguage>{
 		'ble',
 		'org',
 		'dfb',
-		'dfw'
+		'dfw',
+		'dff'
 	],
 
 	registers: ['a', 'b', 'c', 'd', 'j', 'j1', 'j2', 'm', 'm1', 'm2', 'x', 'y', 'xy'],
